@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/*👉**************NAVBAR**************👈*/
+.Header {
+  background: #f55a5a;
+  font-size: 15px;
+  color: white;
+  display: flex;
+  height: 55px;
+  align-items: center;
+  justify-content: center;
+}
