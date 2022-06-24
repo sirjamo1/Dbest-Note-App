@@ -14,12 +14,12 @@ export default function App() {
   );
   React.useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
-    //console.log(notes[0].body.split(""));
+    //console.log(JSON.stringify(notes[0].body));
   }, [notes]);
   function createNewNote() {
     const newNote = {
       id: nanoid(),
-      body: "# Type your markdown note's title here",
+      body: "# Type your title here",
     };
 
     setNotes((prevNotes) => [newNote, ...prevNotes]);
