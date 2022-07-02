@@ -8,18 +8,18 @@ import {
   useRouteMatch,
   useParams,
 } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
-import Editor from "./components/Editor";
+import Sidebar from "./components/Notes/Sidebar";
+import Editor from "./components/Notes/Editor";
 import { data } from "./data";
 import Split from "react-split";
 import { nanoid } from "nanoid";
-import { Navbar } from "./components/Navbar";
-import { Home } from "./components/Home";
-import { Contact } from "./components/Contact";
-import { Notes } from "./components/Notes";
+import { Navbar } from "./components/NavBar/Navbar";
+import { Home } from "./components/Home/Home";
+import { Contact } from "./components/Contact/Contact";
+import { Notes } from "./components/Notes/Notes";
 //import { NoteDetails } from "./components/NoteDetails"
 import { NoMatch } from "./components/NoMatch";
-import { SignIn } from "./components/SignIn";
+import { SignIn } from "./components/SignIn/SignIn";
 
 export default function App() {
   return (
@@ -29,7 +29,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="contact" element={<Contact />} />
         <Route path="notes" element={<Notes />}>
-          <Route path="sidebar" element={<Sidebar />}/>
+          <Route path=":note" element={<Notes />}/>
         </Route>
         <Route path="signin" element={<SignIn />} />
         <Route path="*" element={<NoMatch />} />
