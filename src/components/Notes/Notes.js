@@ -96,15 +96,10 @@ const [pencilArrow, setPencilArrow] = useState(true);
           />
         </div>
       ) : (
-        <div className="post-it-container">
-          
-            <h1>You have no notes</h1>
-            <div
-              className="post-it-card create-note"
-              onClick={createNewNote}
-            >
-              Create one now
-            
+        <div className="create-note-container">
+          <h1>You have no notes</h1>
+          <div className="create-note-post-it-card" onClick={createNewNote}>
+            Create one now
           </div>
         </div>
       )}

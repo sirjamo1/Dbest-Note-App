@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,6 +20,7 @@ import { Notes } from "./components/Notes/Notes";
 //import { NoteDetails } from "./components/NoteDetails"
 import { NoMatch } from "./components/NoMatch";
 import { SignIn } from "./components/SignIn/SignIn";
+import { SignUp } from "./components/SignUp/SignUp"
 
 export default function App() {
   return (
@@ -29,12 +30,12 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="contact" element={<Contact />} />
         <Route path="notes" element={<Notes />}>
-          <Route path=":note" element={<Notes />}/>
+          <Route path=":note" element={<Notes />} />
         </Route>
+        <Route path="signup" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
-
     </main>
   );
 }
