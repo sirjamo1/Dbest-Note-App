@@ -6,26 +6,41 @@ export const Contact = () => {
     <div className="contact--container">
       <h1>Contact Us</h1>
       <form>
-        <label>Name*</label>
+        <label>
+          Name<span className="asterisk">*</span>
+          <span className="instructions">
+            (Must only contain characters a - z)
+          </span>
+        </label>
         <input
+          // onChange={(event) => {
+          //   setNewName(event.target.value);
+          // }}
           type="text"
-          defaultValue=""
           placeholder="Name"
           pattern="[a-zA-Z]+"
           required
         ></input>
-        <label>Email*</label>
+        <label>
+          Email<span className="asterisk">*</span>
+          <span className="instructions">(Must be a valid e-mail address)</span>
+        </label>
         <input
+          // onChange={(event) => {
+          //   setNewEmail(event.target.value);
+          // }}
           type="email"
-          defaultValue=""
           placeholder="Email"
           required
         ></input>
-        <label>Title*</label>
-        <input type="text" defaultValue="" placeholder="Title" required></input>
-        <label>Your Message*</label>
+        <label>
+          Title<span className="asterisk">*</span>
+        </label>
+        <input type="text" placeholder="Title" required></input>
+        <label>
+          Your Message<span className="asterisk">*</span>
+        </label>
         <textarea
-          defaultValue=""
           placeholder="Type your message here..."
           required
           rows={7}

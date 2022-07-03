@@ -37,7 +37,10 @@ export function SignUp() {
     <div className="signup--container">
       <h1>Sign Up</h1>
       <form>
-        <label>Name*</label>
+        <label>
+          Name<span className="asterisk">*</span>
+          <span className="instructions">(Must only contain characters a - z)</span>
+        </label>
         <input
           onChange={(event) => {
             setNewName(event.target.value);
@@ -47,7 +50,10 @@ export function SignUp() {
           pattern="[a-zA-Z]+"
           required
         ></input>
-        <label>Email*</label>
+        <label>
+          Email<span className="asterisk">*</span>
+          <span className="instructions">(Must be a valid e-mail address)</span>
+        </label>
         <input
           onChange={(event) => {
             setNewEmail(event.target.value);
@@ -56,23 +62,27 @@ export function SignUp() {
           placeholder="Email"
           required
         ></input>
-        <label>Password*</label>
+        <label>
+          Password<span className="asterisk">*</span>
+          <span className="instructions">
+            (Minimum eight characters, at least one letter and one number)
+          </span>
+        </label>
         <input
           onChange={(event) => {
             setNewPassword(event.target.value);
           }}
           type="password"
           placeholder="password"
-          pattern="[a-zA-Z]+"
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
           required
         ></input>
-        <label>A little about yourself*</label>
+        <label>A little about yourself</label>
         <textarea
           onChange={(event) => {
             setNewBio(event.target.value);
           }}
           placeholder="A little about yourself"
-          required
           rows={7}
           cols={5}
           maxLength={50}

@@ -45,3 +45,10 @@
   border-radius: 6px;
   text-indent: 6px;
 }
+.asterisk {
+  color: red;
+}
+.instructions {
+  color: grey;
+  font-size: 0.7rem ;
+}
