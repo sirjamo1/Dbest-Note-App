@@ -1,10 +1,22 @@
-.nav--pencil {
+.pencil--container {
   position: absolute;
-  width: 250px;
   right: 20px;
+  top: 15px;
+  margin: 0px;
+
 }
-.primary--nav{
-   background-color: #feff9c;
+
+.nav--pencil {
+  width: 250px;
+}
+.signInUp {
+  position: absolute;
+  top: 2px;
+  right: 25%;
+
+}
+.primary--nav {
+  background-color: #feff9c;
   padding: 16px 32px;
   box-shadow: 0.5px 0.5px 10px 0.5px rgba(0, 0, 0, 0.55);
 }

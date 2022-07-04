@@ -12,24 +12,25 @@ export const Notes = () => {
   const [currentNoteId, setCurrentNoteId] = useState(
     (notes[0] && notes[0].id) || ""
   );
-
   React.useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
     const currentNote = findCurrentNote();
 
+    
   }, [notes]);
 
   function createNewNote() {
     const newNote = {
       id: nanoid(),
       title: `Type your title here`,
+      
+      description: "No content",
       date: today.toLocaleString("en-US"),
       update: "",
     };
 
     setNotes((prevNotes) => [newNote, ...prevNotes]);
     setCurrentNoteId(newNote.id);
-
   }
 
   let today = new Date();
@@ -37,12 +38,11 @@ export const Notes = () => {
     setNotes((oldNotes) => {
       const newOldNotes = [];
       for (let i = 0; i < oldNotes.length; i++) {
-        
         if (oldNotes[i].id === currentNoteId) {
-
           newOldNotes.unshift({
             ...oldNotes[i],
             title: text,
+            description: text,
             update: today.toLocaleString("en-US"),
           });
         } else {
@@ -56,8 +56,7 @@ export const Notes = () => {
 
   function deleteNote(event, noteId) {
     event.stopPropagation();
-    setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId))
-
+    setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
   }
 
   function findCurrentNote() {
@@ -67,7 +66,7 @@ export const Notes = () => {
       }) || notes[0]
     );
   }
-const [pencilArrow, setPencilArrow] = useState(true);
+  const [pencilArrow, setPencilArrow] = useState(true);
   function changePencilArrow() {
     setPencilArrow(!pencilArrow);
   }

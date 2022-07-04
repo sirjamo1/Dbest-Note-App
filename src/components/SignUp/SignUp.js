@@ -9,7 +9,9 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-
+//
+//NOTE: ***********Form sends data even when fields are not met*******
+//
 export function SignUp() {
   const [users, setUsers] = useState([]);
   const [newName, setNewName] = useState("");
@@ -39,7 +41,9 @@ export function SignUp() {
       <form>
         <label>
           Name<span className="asterisk">*</span>
-          <span className="instructions">(Must only contain characters a - z)</span>
+          <span className="instructions">
+            (Must only contain characters a - z)
+          </span>
         </label>
         <input
           onChange={(event) => {
@@ -47,7 +51,7 @@ export function SignUp() {
           }}
           type="text"
           placeholder="Name"
-          pattern="[a-zA-Z]+"
+          pattern="^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"
           required
         ></input>
         <label>

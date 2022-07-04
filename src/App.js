@@ -17,10 +17,9 @@ import { Navbar } from "./components/NavBar/Navbar";
 import { Home } from "./components/Home/Home";
 import { Contact } from "./components/Contact/Contact";
 import { Notes } from "./components/Notes/Notes";
-//import { NoteDetails } from "./components/NoteDetails"
 import { NoMatch } from "./components/NoMatch";
 import { SignIn } from "./components/SignIn/SignIn";
-import { SignUp } from "./components/SignUp/SignUp"
+import { SignUp } from "./components/SignUp/SignUp";
 
 export default function App() {
   return (

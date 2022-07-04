@@ -3,12 +3,9 @@ import "./NoteFolderStyles.css";
 import { Link } from "react-router-dom";
 
 export default function Sidebar(props) {
+  // console.log(props.notes[0].title);
   const noteElements = props.notes.map((note, index) => (
-    <Link
-      style={{ textDecoration: "none" }}
-      to={note.title.split("\n")[0]}
-      key={note.id}
-    >
+    <Link style={{ textDecoration: "none" }} to={note.title} key={note.id}>
       <div
         className={`title ${
           note.id === props.currentNote.id ? "selected-note" : ""
@@ -16,8 +13,10 @@ export default function Sidebar(props) {
         onClick={() => props.setCurrentNoteId(note.id)}
       >
         <div className="text-snippet">
+          {/* <h1 className="text-snippet">{note.title}</h1> */}
           <h1 className="text-snippet">{note.title.split("\n")[0]}</h1>
         </div>
+        {/* <p className="text-snippet description">{note.description}</p> */}
         <p className="text-snippet description">
           {note.title.slice(`${note.title.split("\n")[0].length}`)
             ? note.title.slice(`${note.title.split("\n")[0].length}`, 150)
