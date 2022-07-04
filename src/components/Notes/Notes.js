@@ -1,29 +1,24 @@
-import React from "react";
 import Sidebar from "./Sidebar";
 import Editor from "./Editor";
 import { nanoid } from "nanoid";
 import "./NoteFolderStyles.css";
-import { useState } from "react";
+import { useState, useEffect, React } from "react";
 
-export const Notes = () => {
-  const [notes, setNotes] = React.useState(
+export function Notes() {
+  const [notes, setNotes] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || []
   );
   const [currentNoteId, setCurrentNoteId] = useState(
     (notes[0] && notes[0].id) || ""
   );
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
-    const currentNote = findCurrentNote();
-
-    
   }, [notes]);
 
   function createNewNote() {
     const newNote = {
       id: nanoid(),
       title: `Type your title here`,
-      
       description: "No content",
       date: today.toLocaleString("en-US"),
       update: "",
@@ -104,4 +99,4 @@ export const Notes = () => {
       )}
     </div>
   );
-};
+}

@@ -1,11 +1,12 @@
-import React from "react";
+import { React} from "react";
 import "./NoteFolderStyles.css";
 import { Link } from "react-router-dom";
 
 export default function Sidebar(props) {
-  // console.log(props.notes[0].title);
+  console.log(props.notes); // this is showing body from original text editor
   const noteElements = props.notes.map((note, index) => (
-    <Link style={{ textDecoration: "none" }} to={note.title} key={note.id}>
+    <Link style={{ textDecoration: "none" }} to={note.id} key={note.id}>
+      
       <div
         className={`title ${
           note.id === props.currentNote.id ? "selected-note" : ""
