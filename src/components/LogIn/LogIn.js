@@ -34,9 +34,9 @@ export const LogIn = () => {
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,
 
   const redirectPath = location.state?.path || "/"
-console.log({userData});
-console.log({user});
-console.log({ userPassword });
+// console.log({userData});
+// console.log({user});
+// console.log({ userPassword });
   const handleLogin = () => {
     for (let i = 0; i < userData.length; i++)
     if (userData[i].name === user && userData[i].password === userPassword) {

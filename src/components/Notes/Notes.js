@@ -3,8 +3,37 @@ import Editor from "./Editor";
 import { nanoid } from "nanoid";
 import "./NoteFolderStyles.css";
 import { useState, useEffect, React } from "react";
+//<<<<<<<<<<<<<<<<<firebase zone>>>>>>>>>>>>>>>>>>>>>>
+import { db } from "../../firebase-config"
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 export function Notes() {
+const [userData, setUserData] = useState([]);
+const usersCollectionRef = collection(db, "users");
+  useEffect(() => {
+    const getUserData = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUserData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log({userData})
+    };
+    getUserData();
+  }, []);
+
+//**To Do List Here */
+//*find firebase user.notes
+//*make sure it's only the user that is logged in notes
+//*save the notes from from screen to that user
+//*update said notes
+//*delete said notes
+//
+  //<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const [notes, setNotes] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || []
   );
