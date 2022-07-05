@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../auth";
 import "./NavBar.css";
 import pencil from "../images/pencil.png";
 
@@ -10,23 +11,29 @@ export const Navbar = () => {
       textDecoration: isActive ? "none" : "underline",
     };
   };
+  const auth = useAuth();
   return (
     <nav className="primary--nav">
       <NavLink style={navLinkStyles} to="/">
         Home
       </NavLink>
-      <NavLink style={navLinkStyles} to="contact">
+      <NavLink style={navLinkStyles} to="/contact">
         Contact
       </NavLink>
-      <NavLink style={navLinkStyles} to="notes">
+      <NavLink style={navLinkStyles} to="/notes">
         Notes
       </NavLink>
-      <NavLink style={navLinkStyles} to="signin">
-        <div className="pencil--container">
-          <img className="nav--pencil" src={pencil} alt="pencil"></img>
-          <div className="signInUp">Sign In / Sign Up</div>
-        </div>
+      <NavLink style={navLinkStyles} to="/profile">
+        Profile
       </NavLink>
+      {!auth.user && (
+        <NavLink style={navLinkStyles} to="/Login">
+          <div className="pencil--container">
+            <img className="nav--pencil" src={pencil} alt="pencil"></img>
+            <div className="signInUp">Log In</div>
+          </div>
+        </NavLink>
+      )}
     </nav>
   );
 };

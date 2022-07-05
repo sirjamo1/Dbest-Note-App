@@ -3,17 +3,16 @@
   right: 20px;
   top: 15px;
   margin: 0px;
-
 }
 
 .nav--pencil {
   width: 250px;
+  display: flex;
 }
 .signInUp {
   position: absolute;
   top: 2px;
-  right: 25%;
-
+  right: 40%;
 }
 .primary--nav {
   background-color: #feff9c;
