@@ -42,7 +42,7 @@ export function Contact() {
         <label>
           Full name<span className="asterisk">*</span>
           <span className="instructions">
-            (Must only contain characters a - z)
+            (Must only contain characters a - Z)
           </span>
         </label>
         <input
@@ -99,7 +99,7 @@ export function Contact() {
           Send
         </button>
       </div>
-      {contact.map((con) => {
+      {/* {contact.map((con) => {
           return (
             <div>
               <p>Name: {con.name}</p>
@@ -108,7 +108,7 @@ export function Contact() {
               <p>message: {con.message}</p>
             </div>
           );
-        })}
+        })} */}
     </div>
   );
 }

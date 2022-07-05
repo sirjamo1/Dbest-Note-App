@@ -14,27 +14,35 @@ import "./LogIn.css"
 
 export const LogIn = () => {
   const [user, setUser] = useState("")
+  const [userPassword, setUserPassword] = useState("")
+  
+  const [userData, setUserData] = useState()
   // const [users, setUsers] = useState([]); // not sure about
   const auth = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   //<<<<<<<<<from firebase
-  // const usersCollectionRef = collection(db, "users");
-  //   useEffect(() => {
-  //     const getUsers = async () => {
-  //       const data = await getDocs(usersCollectionRef);
-  //       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //       // console.log(getUsers);
-  //     };
-  //     getUsers();
-  //   }, []);
+  const usersCollectionRef = collection(db, "users");
+    useEffect(() => {
+      const getUsers = async () => {
+        const data = await getDocs(usersCollectionRef);
+          setUserData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        
+      };
+      getUsers();
+    }, [user]);
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,
 
   const redirectPath = location.state?.path || "/"
-
+console.log({userData});
+console.log({user});
+console.log({ userPassword });
   const handleLogin = () => {
-    auth.login(user)
-    navigate(redirectPath, { replace: true})
+    for (let i = 0; i < userData.length; i++)
+    if (userData[i].name === user && userData[i].password === userPassword) {
+      auth.login(user);
+      navigate(redirectPath, { replace: true });
+    }
   }
   const handleToSignUpPage = () => {
     navigate("/signup")
@@ -44,10 +52,14 @@ export const LogIn = () => {
       <h1>LogIn</h1>
       <div className="log-in-card">
         <label>
-          Username: {""}
+          Full name: {""}
           <input type="text" onChange={(e) => setUser(e.target.value)} />
         </label>
-        <button onClick={handleLogin} >Login</button>
+        <label>
+          Password: {""}
+          <input type="text" onChange={(e) => setUserPassword(e.target.value)} />
+        </label>
+        <button onClick={handleLogin}>Login</button>
         <h3>Don't have an Account?</h3>
         <button onClick={handleToSignUpPage}>Sign up</button>
       </div>

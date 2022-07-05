@@ -42,7 +42,7 @@ export function SignUp() {
         <label>
           Full Name<span className="asterisk">*</span>
           <span className="instructions">
-            (Must only contain characters a - z)
+            (Must only contain characters a - Z)
           </span>
         </label>
         <input
@@ -51,7 +51,7 @@ export function SignUp() {
           }}
           type="text"
           placeholder="Name"
-          // pattern="^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"
+          pattern="^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"
           required
         ></input>
         <label>
@@ -96,7 +96,7 @@ export function SignUp() {
           Sign Up
         </button>
       </div>
-      {users.map((user) => {
+      {/* {users.map((user) => {
         return (
           <div>
             <p>Name: {user.name}</p>
@@ -104,7 +104,7 @@ export function SignUp() {
             <p>Bio: {user.bio}</p>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }
