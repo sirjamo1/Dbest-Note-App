@@ -16,7 +16,7 @@
 .signup--container h1 {
   font-size: 2.5rem;
 }
-.signup--container form {
+.signup-post-it {
   width: 400px;
   height: 400px;
   background-color: #feff9c;

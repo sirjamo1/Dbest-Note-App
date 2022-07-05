@@ -1,13 +1,34 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../auth";
+import { db } from "../../firebase-config";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import "./LogIn.css"
 
 export const LogIn = () => {
   const [user, setUser] = useState("")
+  // const [users, setUsers] = useState([]); // not sure about
   const auth = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
+  //<<<<<<<<<from firebase
+  // const usersCollectionRef = collection(db, "users");
+  //   useEffect(() => {
+  //     const getUsers = async () => {
+  //       const data = await getDocs(usersCollectionRef);
+  //       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //       // console.log(getUsers);
+  //     };
+  //     getUsers();
+  //   }, []);
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,
 
   const redirectPath = location.state?.path || "/"
 

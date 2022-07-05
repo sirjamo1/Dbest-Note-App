@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
-
+// need to make a .envfile for below
 const firebaseConfig = {
   apiKey: "AIzaSyC3PnOBtRvgc3udm-4RTRflJn_aqwS5xro",
   authDomain: "dbest-note-app.firebaseapp.com",

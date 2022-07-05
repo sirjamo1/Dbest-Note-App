@@ -31,16 +31,16 @@ export function SignUp() {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log(getUsers);
+      // console.log(getUsers);
     };
     getUsers();
   }, []);
   return (
     <div className="signup--container">
       <h1>Sign Up</h1>
-      <form>
+      <div className="signup-post-it">
         <label>
-          Name<span className="asterisk">*</span>
+          Full Name<span className="asterisk">*</span>
           <span className="instructions">
             (Must only contain characters a - z)
           </span>
@@ -51,7 +51,7 @@ export function SignUp() {
           }}
           type="text"
           placeholder="Name"
-          pattern="^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"
+          // pattern="^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"
           required
         ></input>
         <label>
@@ -92,10 +92,10 @@ export function SignUp() {
           maxLength={50}
         />
 
-        <button onClick={createUser} className="signup--submit">
+        <button onClick={createUser} className="signup--submit" type="submit">
           Sign Up
         </button>
-      </form>
+      </div>
       {users.map((user) => {
         return (
           <div>
