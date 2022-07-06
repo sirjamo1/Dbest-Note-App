@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 
 export function Notes() {
+ 
     const [notes, setNotes] = useState([]);
     const notesCollectionRef = collection(db, "notes");
     useEffect(() => {
@@ -29,6 +30,7 @@ export function Notes() {
             id: nanoid(),
             title: `Type your title here`,
             description: "No content",
+            // text: text,
             date: today.toLocaleString("en-US"),
             update: "",
         });
@@ -63,7 +65,7 @@ export function Notes() {
                     newOldNotes.unshift({
                         ...oldNotes[i],
                         title: text,
-                        text: text,
+                        // text: text, //not sure about this
                         description: text,
                         update: today.toLocaleString("en-US"),
                     });
@@ -74,6 +76,7 @@ export function Notes() {
             return newOldNotes;
         });
     }
+    //NOTE: this doesn't work
     const saveNotes = async (id, text) => {
         const noteDoc = doc(db, "notes", id);
         await updateDoc(noteDoc, notes);
