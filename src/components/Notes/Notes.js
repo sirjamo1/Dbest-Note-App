@@ -76,11 +76,8 @@ export function Notes() {
             return newOldNotes;
         });
     }
-<<<<<<< HEAD
-    //****NOTE: saveNotes does not work
-=======
     //NOTE: this doesn't work
->>>>>>> Dnote-public-private-routes
+
     const saveNotes = async (id, text) => {
         const noteDoc = doc(db, "notes", id);
         await updateDoc(noteDoc, notes);
