@@ -74,6 +74,7 @@ export function Notes() {
             return newOldNotes;
         });
     }
+    //****NOTE: saveNotes does not work
     const saveNotes = async (id, text) => {
         const noteDoc = doc(db, "notes", id);
         await updateDoc(noteDoc, notes);

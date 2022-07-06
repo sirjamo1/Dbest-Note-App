@@ -15,40 +15,40 @@ import { UserDetails } from "./Users/UserDetails";
 import { RequireAuth } from "./components/RequireAuth";
 
 export default function App() {
-  return (
-    <AuthProvider>
-      <main>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="contact" element={<Contact />} />
-          <Route
-            path="notes"
-            element={
-              <RequireAuth> 
-                <Notes />
-              </RequireAuth>
-            }
-          >
-            <Route path=":note" element={<Notes />} />
-          </Route>
-          <Route
-            path="profile"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />
-          <Route path="login" element={<LogIn />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="users" element={<Users />}>
-            <Route path=":userId" element={<UserDetails />} />
-            <Route path="admin" element={<Admin />} />
-          </Route>
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </main>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <main>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="contact" element={<Contact />} />
+                    <Route
+                        path="notes"
+                        element={
+                            <RequireAuth>
+                                <Notes />
+                            </RequireAuth>
+                        }
+                    >
+                        <Route path=":note" element={<Notes />} />
+                    </Route>
+                    <Route
+                        path="profile"
+                        element={
+                            <RequireAuth>
+                                <Profile />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route path="login" element={<LogIn />} />
+                    <Route path="signup" element={<SignUp />} />
+                    <Route path="users" element={<Users />}>
+                        <Route path=":userId" element={<UserDetails />} />
+                        <Route path="admin" element={<Admin />} />
+                    </Route>
+                    <Route path="*" element={<NoMatch />} />
+                </Routes>
+            </main>
+        </AuthProvider>
+    );
 }

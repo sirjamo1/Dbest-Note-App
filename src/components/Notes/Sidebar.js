@@ -52,6 +52,7 @@ export default function Sidebar(props) {
                 <button className="new-note" onClick={props.saveNotes}>
                     S
                 </button>
+                {/* NOTE: saveNotes doesn't work */}
             </div>
             {noteElements}
         </section>
