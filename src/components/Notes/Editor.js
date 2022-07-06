@@ -2,8 +2,13 @@ import React from "react";
 import ReactMde from "react-mde";
 import Showdown from "showdown";
 import pencilArrowImg from "../images/pencilArrowImg.png";
+<<<<<<< HEAD
 // import "react-mde/lib/styles/css/react-mde-all.css";
 import "./NoteFolderStyles.css";
+=======
+import "react-mde/lib/styles/css/react-mde-all.css";
+import "./NoteFolderStyles.css"
+>>>>>>> Dnote-public-private-routes
 
 export default function Editor({
     currentNote,
