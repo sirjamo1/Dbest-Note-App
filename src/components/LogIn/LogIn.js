@@ -17,7 +17,6 @@ export const LogIn = () => {
   const [userPassword, setUserPassword] = useState("")
   
   const [userData, setUserData] = useState()
-  // const [users, setUsers] = useState([]); // not sure about
   const auth = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
@@ -27,7 +26,7 @@ export const LogIn = () => {
       const getUsers = async () => {
         const data = await getDocs(usersCollectionRef);
           setUserData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        
+        // console.log(userData[0].name)
       };
       getUsers();
     }, [user]);

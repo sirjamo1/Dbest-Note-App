@@ -25,7 +25,7 @@ export default function App() {
           <Route
             path="notes"
             element={
-              <RequireAuth>
+              <RequireAuth> 
                 <Notes />
               </RequireAuth>
             }
