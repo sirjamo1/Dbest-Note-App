@@ -1,6 +1,15 @@
 import { React, useState, useEffect } from "react";
 import "./SignUp.css";
 import { db } from "../../firebase-config";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../firebase-config";
+ import {useAuth} from "../auth"
 import {
     collection,
     getDocs,
@@ -9,51 +18,63 @@ import {
     doc,
     deleteDoc,
 } from "firebase/firestore";
-//
-//NOTE: ***********Form sends data even when fields are not met*******
+
+//Need to change when user sign up they are taken back to login page
 //
 export function SignUp() {
-    const [users, setUsers] = useState([]);
-    const [newName, setNewName] = useState("");
-    const [newEmail, setNewEmail] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [newBio, setNewBio] = useState("");
-    const usersCollectionRef = collection(db, "users");
-    const createUser = async () => {
-        await addDoc(usersCollectionRef, {
-            name: newName,
-            email: newEmail,
-            password: newPassword,
-            bio: newBio,
-        });
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<NEW CODE
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+    const [user, setUser] = useState({});
+    const [userLog, setUserLog] = useState("")
+    
+     const authLog = useAuth();                 // from login
+    const navigate = useNavigate();         //from login
+    const location = useLocation();        //from login
+    onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+    });
+
+    const register = async () => {
+        try {
+            const user = await createUserWithEmailAndPassword(
+                auth,
+                registerEmail,
+                registerPassword
+            );
+            console.log(user);
+        } catch (error) {
+            console.log(error.message);
+        }
     };
-    useEffect(() => {
-        const getUsers = async () => {
-            const data = await getDocs(usersCollectionRef);
-            setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-            // console.log(getUsers);
-        };
-        getUsers();
-    }, []);
+    const login = async () => {
+        try {
+            const user = await signInWithEmailAndPassword(
+                auth,
+                loginEmail,
+                loginPassword
+            );
+             authLog.login(userLog);                           //from login
+            navigate(redirectPath, { replace: true }); //from login
+            console.log(user);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+    const logout = async () => {
+        await signOut(auth);
+        authLog.logout(); 
+        navigate("/")
+        
+    };
+
+     const redirectPath = location.state?.path || "/"; //from login
     return (
         <div className="signup--container">
             <h1>Sign Up</h1>
             <div className="signup-post-it">
-                <label>
-                    Full Name<span className="asterisk">*</span>
-                    <span className="instructions">
-                        (Must only contain characters a - Z)
-                    </span>
-                </label>
-                <input
-                    onChange={(event) => {
-                        setNewName(event.target.value);
-                    }}
-                    type="text"
-                    placeholder="Name"
-                    pattern="^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"
-                    required
-                ></input>
                 <label>
                     Email<span className="asterisk">*</span>
                     <span className="instructions">
@@ -62,7 +83,7 @@ export function SignUp() {
                 </label>
                 <input
                     onChange={(event) => {
-                        setNewEmail(event.target.value);
+                        setLoginEmail(event.target.value);
                     }}
                     type="email"
                     placeholder="Email"
@@ -77,41 +98,136 @@ export function SignUp() {
                 </label>
                 <input
                     onChange={(event) => {
-                        setNewPassword(event.target.value);
+                        setLoginPassword(event.target.value);
                     }}
                     type="password"
                     placeholder="password"
                     pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                     required
                 ></input>
-                <label>A little about yourself</label>
-                <textarea
+                <button
+                    onClick={login}
+                    className="signup--submit"
+                    type="submit"
+                >
+                    Login
+                </button>
+                <label>
+                    Email<span className="asterisk">*</span>
+                    <span className="instructions">
+                        (Must be a valid e-mail address)
+                    </span>
+                </label>
+                <input
                     onChange={(event) => {
-                        setNewBio(event.target.value);
+                        setRegisterEmail(event.target.value);
                     }}
-                    placeholder="A little about yourself"
-                    rows={7}
-                    cols={5}
-                    maxLength={50}
-                />
+                    type="email"
+                    placeholder="Email"
+                    required
+                ></input>
+                <label>
+                    Password<span className="asterisk">*</span>
+                    <span className="instructions">
+                        (Minimum eight characters, at least one letter and one
+                        number)
+                    </span>
+                </label>
+                <input
+                    onChange={(event) => {
+                        setRegisterPassword(event.target.value);
+                    }}
+                    type="password"
+                    placeholder="password"
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                    required
+                ></input>
 
                 <button
-                    onClick={createUser}
+                    onClick={register}
                     className="signup--submit"
                     type="submit"
                 >
                     Sign Up
                 </button>
+                <h4>User Logged In:</h4>
+                {user?.email}
+                {/* {auth.currentUser.email} */}
+                <button
+                    onClick={logout}
+                    className="signup--submit"
+                    type="submit"
+                >
+                    Sign out
+                </button>
             </div>
-            {/* {users.map((user) => {
-        return (
-          <div>
-            <p>Name: {user.name}</p>
-            <p>email: {user.email}</p>
-            <p>Bio: {user.bio}</p>
-          </div>
-        );
-      })} */}
         </div>
     );
 }
+
+//,<<<<<<<<<<<<<OLD CODE>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//
+//    //
+// const [newName, setNewName] = useState("");
+// const [newEmail, setNewEmail] = useState("");
+// const [newPassword, setNewPassword] = useState("");
+// const [newBio, setNewBio] = useState("");
+// const usersCollectionRef = collection(db, "users");
+// const createUser = async () => {
+//     await addDoc(usersCollectionRef, {
+//         name: newName,
+//     placeholder="Name"
+//     pattern="^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"
+//     required
+// ></input> */
+//                 }
+// useEffect(() => {
+//     const getUsers = async () => {
+//         const data = await getDocs(usersCollectionRef);
+//         setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+//         // console.log(getUsers);
+//     };
+//     getUsers();
+// }, []);
+
+//         email: newEmail,
+//         password: newPassword,
+//         bio: newBio,
+//     });
+// };
+//             {
+//                 /* {users.map((user) => {
+//     return (
+//       <div>
+//         <p>Name: {user.name}</p>
+//         <p>email: {user.email}</p>
+//         <p>Bio: {user.bio}</p>
+//       </div>
+//     );
+//   })} */
+//             }
+
+//     {
+//         /* <label>A little about yourself</label>
+// <textarea
+//     onChange={(event) => {
+//         setNewBio(event.target.value);
+//     }}
+//     placeholder="A little about yourself"
+//     rows={7}
+//     cols={5}
+//     maxLength={50}
+// /> */
+//     }
+//                 {
+//                     /* <label>
+//     Full Name<span className="asterisk">*</span>
+//     <span className="instructions">
+//         (Must only contain characters a - Z)
+//     </span>
+// </label>
+// <input
+//     onChange={(event) => {
+//         setNewName(event.target.value);
+//     }}
+//     type="text"

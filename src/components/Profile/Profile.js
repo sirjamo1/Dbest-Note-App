@@ -5,11 +5,11 @@ import "./Profile.css";
 
 
 export const Profile = () => {
-  const auth = useAuth()
+  const authLog = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    auth.logout()
+    authLog.logout()
     navigate('/')
   }
   return (

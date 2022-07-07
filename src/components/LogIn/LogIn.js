@@ -13,6 +13,7 @@ import {
 import "./LogIn.css";
 
 export const LogIn = () => {
+    
     const [user, setUser] = useState("");
     const [userPassword, setUserPassword] = useState("");
 
@@ -28,7 +29,7 @@ export const LogIn = () => {
             setUserData(
                 data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
             );
-            // console.log(userData[0].name)
+             console.log(data[0])
         };
         getUsers();
     }, [user]);
@@ -39,14 +40,16 @@ export const LogIn = () => {
     // console.log({user});
     // console.log({ userPassword });
     const handleLogin = () => {
-        for (let i = 0; i < userData.length; i++)
+        for (let i = 0; i < userData.length; i++) {
             if (
                 userData[i].name === user &&
                 userData[i].password === userPassword
             ) {
                 auth.login(user);
                 navigate(redirectPath, { replace: true });
+                console.log(userData[i])
             }
+        }
     };
     const handleToSignUpPage = () => {
         navigate("/signup");

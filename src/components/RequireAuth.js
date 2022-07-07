@@ -5,10 +5,10 @@ import { useLocation } from 'react-router-dom'
 
 export const RequireAuth = ({children}) => {
  const location = useLocation()
- const auth = useAuth()
+ const authLog = useAuth()
 
- if(!auth.user) {
-return <Navigate to="/login" state={{ path: location.pathname }} />
+ if(!authLog.userLog) {
+return <Navigate to="/signup" state={{ path: location.pathname }} />
  }
   return (
     children

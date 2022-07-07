@@ -27,7 +27,7 @@ export default function App() {
                         element={
                             <RequireAuth>
                                 <Notes />
-                            </RequireAuth>
+                             </RequireAuth>
                         }
                     >
                         <Route path=":note" element={<Notes />} />
@@ -37,10 +37,10 @@ export default function App() {
                         element={
                             <RequireAuth>
                                 <Profile />
-                            </RequireAuth>
+                             </RequireAuth>
                         }
                     />
-                    <Route path="login" element={<LogIn />} />
+                    {/* <Route path="login" element={<LogIn />} /> */}
                     <Route path="signup" element={<SignUp />} />
                     <Route path="users" element={<Users />}>
                         <Route path=":userId" element={<UserDetails />} />

@@ -6,7 +6,7 @@ import "./NavBar.css";
 import pencil from "../images/pencil.png";
 
 export const Navbar = () => {
-  const auth = useAuth();
+  const authLog = useAuth();
   const navigate = useNavigate();
   const handleLogout = () => {
     auth.logout();
@@ -32,15 +32,15 @@ export const Navbar = () => {
       <NavLink style={navLinkStyles} to="/profile">
         Profile
       </NavLink>
-      {!auth.user && (
-        <NavLink style={navLinkStyles} to="/login">
+      {!authLog.userLog && (
+        <NavLink style={navLinkStyles} to="/signup">
           <div className="pencil--container">
             <img className="nav--pencil" src={pencil} alt="pencil"></img>
             <div className="signInUp">Log In</div>
           </div>
         </NavLink>
       )}
-      {auth.user && (
+      {authLog.userLog && (
         <NavLink style={navLinkStyles} to="/">
           <div onClick={handleLogout} className="pencil--container">
             <img className="nav--pencil" src={pencil} alt="pencil"></img>

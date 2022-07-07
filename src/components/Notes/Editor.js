@@ -32,6 +32,7 @@ export default function Editor({
                 style={pencilArrowStyles}
                 src={pencilArrowImg}
                 onClick={changePencilArrow}
+                alt="pencil arrow to hide sidebar"
             />
             <ReactMde
                 value={currentNote.title}
