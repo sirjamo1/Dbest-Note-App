@@ -5,19 +5,19 @@ import "./Profile.css";
 
 
 export const Profile = () => {
-  const authLog = useAuth()
+  const auth = useAuth()
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    authLog.logout()
-    navigate('/')
-  }
+  // const handleLogout = () => {
+  //   auth.logout()
+  //   navigate('/')
+  // }
   return (
     <div className="profile-post-it-container">
-      <h1>Welcome {auth.user}</h1>
+      <h1>Welcome {}</h1>
       <div className="profile-card">
         <h4>profile page</h4>
-        <button onClick={handleLogout}>Logout</button>
+        {/* <button >Logout</button> */}
       </div>
     </div>
   );

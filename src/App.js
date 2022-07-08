@@ -7,7 +7,7 @@ import { Contact } from "./components/Contact/Contact";
 import { Notes } from "./components/Notes/Notes";
 import { Profile } from "./components/Profile/Profile";
 import { NoMatch } from "./components/NoMatch";
-import { LogIn } from "./components/LogIn/LogIn";
+//import { LogIn } from "./components/LogIn/LogIn";
 import { SignUp } from "./components/SignUp/SignUp";
 import { Users } from "./Users/Users";
 import { Admin } from "./components/Admin";
@@ -25,9 +25,9 @@ export default function App() {
                     <Route
                         path="notes"
                         element={
-                            <RequireAuth>
+                            // <RequireAuth>
                                 <Notes />
-                             </RequireAuth>
+                            /* </RequireAuth> */
                         }
                     >
                         <Route path=":note" element={<Notes />} />
@@ -35,12 +35,12 @@ export default function App() {
                     <Route
                         path="profile"
                         element={
-                            <RequireAuth>
+                            // <RequireAuth>
                                 <Profile />
-                             </RequireAuth>
+                            // </RequireAuth>
                         }
                     />
-                    {/* <Route path="login" element={<LogIn />} /> */}
+
                     <Route path="signup" element={<SignUp />} />
                     <Route path="users" element={<Users />}>
                         <Route path=":userId" element={<UserDetails />} />
@@ -52,3 +52,7 @@ export default function App() {
         </AuthProvider>
     );
 }
+
+//
+//
+//  {/* <Route path="login" element={<LogIn />} /> */}

@@ -9,16 +9,7 @@ import {
     signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../firebase-config";
- import {useAuth} from "../auth"
-import {
-    collection,
-    getDocs,
-    addDoc,
-    updateDoc,
-    doc,
-    deleteDoc,
-} from "firebase/firestore";
-
+      
 //Need to change when user sign up they are taken back to login page
 //
 export function SignUp() {
@@ -27,16 +18,13 @@ export function SignUp() {
     const [registerPassword, setRegisterPassword] = useState("");
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
-    const [user, setUser] = useState({});
-    const [userLog, setUserLog] = useState("")
-    
-     const authLog = useAuth();                 // from login
-    const navigate = useNavigate();         //from login
-    const location = useLocation();        //from login
+    const [userFire, setUserFire] = useState({});
+    const navigate = useNavigate(); 
+    const location = useLocation(); 
+    const redirectPath = location.state?.path || "/";
     onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
+        setUserFire(currentUser);
     });
-
     const register = async () => {
         try {
             const user = await createUserWithEmailAndPassword(
@@ -44,7 +32,6 @@ export function SignUp() {
                 registerEmail,
                 registerPassword
             );
-            console.log(user);
         } catch (error) {
             console.log(error.message);
         }
@@ -56,21 +43,15 @@ export function SignUp() {
                 loginEmail,
                 loginPassword
             );
-             authLog.login(userLog);                           //from login
-            navigate(redirectPath, { replace: true }); //from login
-            console.log(user);
+            navigate(redirectPath, { replace: true }); // redirects user back to where they clicked before (if login is true)
         } catch (error) {
             console.log(error.message);
         }
     };
     const logout = async () => {
         await signOut(auth);
-        authLog.logout(); 
-        navigate("/")
-        
+        navigate("/"); //redirects user back to home page on logout
     };
-
-     const redirectPath = location.state?.path || "/"; //from login
     return (
         <div className="signup--container">
             <h1>Sign Up</h1>
@@ -151,7 +132,7 @@ export function SignUp() {
                     Sign Up
                 </button>
                 <h4>User Logged In:</h4>
-                {user?.email}
+                {userFire?.email}
                 {/* {auth.currentUser.email} */}
                 <button
                     onClick={logout}
@@ -167,6 +148,15 @@ export function SignUp() {
 
 //,<<<<<<<<<<<<<OLD CODE>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //
+
+//import {
+//     collection,
+//     getDocs,
+//     addDoc,
+//     updateDoc,
+//     doc,
+//     deleteDoc,
+// } from "firebase/firestore";
 //    //
 // const [newName, setNewName] = useState("");
 // const [newEmail, setNewEmail] = useState("");

@@ -1,21 +1,33 @@
-import {useState, createContext, useContext} from "react"
+import { useState, createContext, useContext } from "react";
 
-const AuthContext = createContext(null) 
+//assigning to AuthContext and giving it a default value of null
+const AuthContext = createContext(null);
+// function to change value
+export const AuthProvider = ({ children }) => {
+    //state that will set the value initially set to null
+    const [user, setUser] = useState(null);
 
-export const AuthProvider = ({children}) => {
- const [userLog, setUserLog] = useState(null)
+    const login = (user) => {
+        // change value to user  (this is changed by calling the function)
+        setUser(user);
+    };
+    const logout = () => {
+        // change value to null (this is changed by calling the function)
+        setUser(null);
+    };
 
- const login = user => {
-  setUserLog(user)
- }
- const logout = () => {
-  setUserLog(null)
- }
-
- return ( <AuthContext.Provider value={{userLog, login, logout}}>{children}</AuthContext.Provider>
- )
-}
-
+    return ( //wrapping the child components 
+        <AuthContext.Provider value={{ user, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+   //import this where i want to change the value (eg. sign in)
 export const useAuth = () => {
- return useContext(AuthContext)
-}
+    return useContext(AuthContext);
+};
+
+
+//If i would like to use some where i would 
+// 1. import it (eg. import useAuth from "./auth.js")
+// 2. assign it to a variable (eg. const )
