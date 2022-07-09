@@ -1,3 +1,4 @@
+import { onAuthStateChanged, getAuth } from "firebase/auth";
 import { useState, createContext, useContext, useEffect } from "react";
 
 //assigning to AuthContext and giving it a default value of null
@@ -6,9 +7,14 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     //state that will set the value initially set to null
     const [user, setUser] = useState(null);
-    useEffect(() => {
-        sessionStorage.getItem("Auth Token") ? setUser(user) : setUser(null);
-    }, [user]);
+    const auth = getAuth()
+    onAuthStateChanged(auth, (user) => {
+        setUser(user)
+    });
+    
+    // useEffect(() => {
+    //     sessionStorage.getItem("Auth Token") ? setUser(user) : setUser(null);
+    // }, [user]);
 
 
 

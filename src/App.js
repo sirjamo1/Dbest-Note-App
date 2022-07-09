@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./components/auth";
 import { Navbar } from "./components/NavBar/Navbar";
@@ -13,8 +13,14 @@ import { Users } from "./Users/Users";
 import { Admin } from "./components/Admin";
 import { UserDetails } from "./Users/UserDetails";
 import { RequireAuth } from "./components/RequireAuth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function App() {
+    const [user, setUser] = useState(null);
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+        setUser(user);
+    });
     return (
         <AuthProvider>
             <main>
@@ -25,9 +31,13 @@ export default function App() {
                     <Route
                         path="notes"
                         element={
-                            <RequireAuth>
+                            user ? (
+                                // <RequireAuth> // this works but not great
                                 <Notes />
-                            </RequireAuth>
+                            ) : (
+                                <SignUp />
+                            )
+                            //  </RequireAuth>
                         }
                     >
                         <Route path=":note" element={<Notes />} />
@@ -35,9 +45,9 @@ export default function App() {
                     <Route
                         path="profile"
                         element={
-                            // <RequireAuth>
+                            //  <RequireAuth>
                             <Profile />
-                            // </RequireAuth>
+                            //  </RequireAuth>
                         }
                     />
 

@@ -11,6 +11,8 @@ import {
     updateDoc,
     doc,
     deleteDoc,
+    //query,
+   // serverTimestamp
 } from "firebase/firestore";
 
 export function Notes() {
@@ -30,7 +32,7 @@ export function Notes() {
             id: nanoid(),
             title: `Type your title here`,
             description: "No content",
-            // text: text,
+           //date: serverTimestamp(), //this stalls browser (some error about nanoseconds)
             date: today.toLocaleString("en-US"),
             update: "",
         });
@@ -67,6 +69,7 @@ export function Notes() {
                         title: text,
                         // text: text, //not sure about this
                         description: text,
+                       // update: serverTimestamp(),
                         update: today.toLocaleString("en-US"),
                     });
                 } else {
