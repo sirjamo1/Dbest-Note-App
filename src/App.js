@@ -25,9 +25,9 @@ export default function App() {
                     <Route
                         path="notes"
                         element={
-                            // <RequireAuth>
+                            <RequireAuth>
                                 <Notes />
-                            /* </RequireAuth> */
+                            </RequireAuth>
                         }
                     >
                         <Route path=":note" element={<Notes />} />
@@ -36,7 +36,7 @@ export default function App() {
                         path="profile"
                         element={
                             // <RequireAuth>
-                                <Profile />
+                            <Profile />
                             // </RequireAuth>
                         }
                     />

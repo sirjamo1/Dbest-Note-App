@@ -1,17 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-//import { useAuth } from "../auth";
-//import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth";
+import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import pencil from "../images/pencil.png";
 
 export const Navbar = () => {
-    // const auth = useAuth();
-    // const navigate = useNavigate();
-    // const handleLogout = () => {
-    //     auth.logout();
-    //     navigate("/");
-    // };
+    const auth = useAuth();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        auth.logout();
+        navigate("/");
+    };
     const navLinkStyles = ({ isActive }) => {
         return {
             fontWeight: isActive ? "bold" : "normal",

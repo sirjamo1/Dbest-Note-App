@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 
 export function Notes() {
- 
+    
     const [notes, setNotes] = useState([]);
     const notesCollectionRef = collection(db, "notes");
     useEffect(() => {

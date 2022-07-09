@@ -9,6 +9,8 @@ import {
     signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../firebase-config";
+
+
       
 //Need to change when user sign up they are taken back to login page
 //
@@ -18,12 +20,12 @@ export function SignUp() {
     const [registerPassword, setRegisterPassword] = useState("");
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
-    const [userFire, setUserFire] = useState({});
+    const [user, setUser] = useState({});
     const navigate = useNavigate(); 
     const location = useLocation(); 
     const redirectPath = location.state?.path || "/";
     onAuthStateChanged(auth, (currentUser) => {
-        setUserFire(currentUser);
+        setUser(currentUser);
     });
     const register = async () => {
         try {
@@ -32,6 +34,8 @@ export function SignUp() {
                 registerEmail,
                 registerPassword
             );
+            sessionStorage.setItem("Auth Token", auth.currentUser.accessToken);
+            navigate("/")
         } catch (error) {
             console.log(error.message);
         }
@@ -43,6 +47,12 @@ export function SignUp() {
                 loginEmail,
                 loginPassword
             );
+           
+          sessionStorage.setItem(
+              "Auth Token",
+              auth.currentUser.accessToken
+          );
+        
             navigate(redirectPath, { replace: true }); // redirects user back to where they clicked before (if login is true)
         } catch (error) {
             console.log(error.message);
@@ -50,8 +60,10 @@ export function SignUp() {
     };
     const logout = async () => {
         await signOut(auth);
+        sessionStorage.removeItem("Auth Token");
         navigate("/"); //redirects user back to home page on logout
     };
+    // console.log(sessionStorage)
     return (
         <div className="signup--container">
             <h1>Sign Up</h1>
@@ -132,7 +144,7 @@ export function SignUp() {
                     Sign Up
                 </button>
                 <h4>User Logged In:</h4>
-                {userFire?.email}
+                {user?.email}
                 {/* {auth.currentUser.email} */}
                 <button
                     onClick={logout}
