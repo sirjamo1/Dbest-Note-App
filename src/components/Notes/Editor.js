@@ -3,9 +3,7 @@ import ReactMde from "react-mde";
 import Showdown from "showdown";
 import pencilArrowImg from "../images/pencilArrowImg.png";
 import "react-mde/lib/styles/css/react-mde-all.css";
-import "./NoteFolderStyles.css"
-
-
+import "./NoteFolderStyles.css";
 
 export default function Editor({
     currentNote,

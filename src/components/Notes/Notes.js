@@ -12,11 +12,10 @@ import {
     doc,
     deleteDoc,
     //query,
-   // serverTimestamp
+    // serverTimestamp
 } from "firebase/firestore";
 
 export function Notes() {
-    
     const [notes, setNotes] = useState([]);
     const notesCollectionRef = collection(db, "notes");
     useEffect(() => {
@@ -32,7 +31,7 @@ export function Notes() {
             id: nanoid(),
             title: `Type your title here`,
             description: "No content",
-           //date: serverTimestamp(), //this stalls browser (some error about nanoseconds)
+            //date: serverTimestamp(), //this stalls browser (some error about nanoseconds)
             date: today.toLocaleString("en-US"),
             update: "",
         });
@@ -69,7 +68,7 @@ export function Notes() {
                         title: text,
                         // text: text, //not sure about this
                         description: text,
-                       // update: serverTimestamp(),
+                        // update: serverTimestamp(),
                         update: today.toLocaleString("en-US"),
                     });
                 } else {

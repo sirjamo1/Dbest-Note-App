@@ -1,15 +1,22 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../auth";
+import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import pencil from "../images/pencil.png";
 
+
 export const Navbar = () => {
-    const auth = useAuth();
+    const [user, setUser] = useState(null);
+    const auth = getAuth();
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            setUser(user);
+        });
+    });
     const navigate = useNavigate();
     const handleLogout = () => {
-        auth.logout();
+        signOut(auth);
         navigate("/");
     };
     const navLinkStyles = ({ isActive }) => {
@@ -18,6 +25,7 @@ export const Navbar = () => {
             textDecoration: isActive ? "none" : "underline",
         };
     };
+    console.log(user);
     return (
         <nav className="primary--nav">
             <NavLink style={navLinkStyles} to="/">
@@ -32,39 +40,30 @@ export const Navbar = () => {
             <NavLink style={navLinkStyles} to="/profile">
                 Profile
             </NavLink>
-            <NavLink style={navLinkStyles} to="/signup">
-                <div className="pencil--container">
-                    <img
-                        className="nav--pencil"
-                        src={pencil}
-                        alt="pencil"
-                    ></img>
-                    <div className="signInUp">Log In</div>
-                </div>
-            </NavLink>
+            {user && (
+                <NavLink style={navLinkStyles} to="/login">
+                    <div className="pencil--container">
+                        <img
+                            className="nav--pencil"
+                            src={pencil}
+                            alt="pencil"
+                        ></img>
+                        <div className="signInUp">Log In</div>
+                    </div>
+                </NavLink>
+            )}
+            {!user && (
+                <NavLink style={navLinkStyles} to="/">
+                    <div onClick={handleLogout} className="pencil--container">
+                        <img
+                            className="nav--pencil"
+                            src={pencil}
+                            alt="pencil"
+                        ></img>
+                        <div className="signInUp">Log out</div>
+                    </div>
+                </NavLink>
+            )}
         </nav>
     );
 };
-
-//OLD
-//
-// {
-//     !auth.user && (
-//         <NavLink style={navLinkStyles} to="/signup">
-//             <div className="pencil--container">
-//                 <img className="nav--pencil" src={pencil} alt="pencil"></img>
-//                 <div className="signInUp">Log In</div>
-//             </div>
-//         </NavLink>
-//     );
-// }
-// {
-//     auth.user && (
-//         <NavLink style={navLinkStyles} to="/">
-//             <div onClick={handleLogout} className="pencil--container">
-//                 <img className="nav--pencil" src={pencil} alt="pencil"></img>
-//                 <div className="signInUp">Log out</div>
-//             </div>
-//         </NavLink>
-//     );
-// }

@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css"
 
 export const Home = () => {
+  //need to add welcome message/link to sign in page
   const user = sessionStorage.getItem("Auth Token")
   const isUserHere = user ? user : "not here"
   return (

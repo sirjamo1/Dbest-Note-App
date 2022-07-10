@@ -7,12 +7,11 @@ import { Contact } from "./components/Contact/Contact";
 import { Notes } from "./components/Notes/Notes";
 import { Profile } from "./components/Profile/Profile";
 import { NoMatch } from "./components/NoMatch";
-//import { LogIn } from "./components/LogIn/LogIn";
+import { Login } from "./components/Login/Login";
 import { SignUp } from "./components/SignUp/SignUp";
 import { Users } from "./Users/Users";
 import { Admin } from "./components/Admin";
 import { UserDetails } from "./Users/UserDetails";
-import { RequireAuth } from "./components/RequireAuth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function App() {
@@ -29,29 +28,18 @@ export default function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="contact" element={<Contact />} />
                     <Route
-                        path="notes"
-                        element={
-                            user ? (
-                                // <RequireAuth> // this works but not great
-                                <Notes />
-                            ) : (
-                                <SignUp />
-                            )
-                            //  </RequireAuth>
-                        }
+                        path={"notes"}
+                        element={user ? <Notes /> : <Login />}
                     >
                         <Route path=":note" element={<Notes />} />
                     </Route>
                     <Route
                         path="profile"
-                        element={
-                            //  <RequireAuth>
-                            <Profile />
-                            //  </RequireAuth>
-                        }
+                        element={user ? <Profile /> : <Login />}
                     />
 
                     <Route path="signup" element={<SignUp />} />
+                    <Route path="login" element={<Login />} />
                     <Route path="users" element={<Users />}>
                         <Route path=":userId" element={<UserDetails />} />
                         <Route path="admin" element={<Admin />} />
@@ -63,6 +51,4 @@ export default function App() {
     );
 }
 
-//
-//
-//  {/* <Route path="login" element={<LogIn />} /> */}
+
