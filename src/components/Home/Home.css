@@ -1,23 +1,31 @@
 .home-post-it-container {
     display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: "Handlee", cursive;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Handlee", cursive;
+    text-decoration: none;
 }
 .home-post-it-card {
-   width: 400px;
-  height: 400px;
-  background-color: #feff9c;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 20px;
-  border-style: none;
-  border-radius: 2px;
-  border-bottom: #bdbf6c 8px solid;
-  border-right: #bdbf6c 2px solid;
+    width: 400px;
+    height: 400px;
+    background-color: #feff9c;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    border-style: none;
+    border-radius: 2px;
+    border-bottom: #bdbf6c 8px solid;
+    border-right: #bdbf6c 2px solid;
+    align-items: center;
 }
 .home--container h1 {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
+}
+.home-post-it-card h2 {
+    font-size: 2.4rem;
+}
+.home-post-it-card h4 {
+    font-size: 2rem;
 }

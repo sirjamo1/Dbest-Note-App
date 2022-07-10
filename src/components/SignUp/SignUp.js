@@ -1,11 +1,11 @@
 import { React, useState } from "react";
 import "./SignUp.css";
-import { db } from "../../firebase-config";
+//import { db } from "../../firebase-config";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
-    signOut,
+   // signOut,
 } from "firebase/auth";
 import { auth } from "../../firebase-config";
 export function SignUp() {
@@ -14,7 +14,7 @@ export function SignUp() {
     const [user, setUser] = useState({});
     const navigate = useNavigate(); 
     const location = useLocation(); 
-    const redirectPath = location.state?.path || "/";
+    //const redirectPath = location.state?.path || "/";
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
     });
@@ -26,16 +26,14 @@ export function SignUp() {
                 registerPassword
             );
             sessionStorage.setItem("Auth Token", auth.currentUser.accessToken);
+            sessionStorage.setItem("uid", auth.currentUser.uid);
+            sessionStorage.setItem("email", auth.currentUser.email);
             navigate("/")
         } catch (error) {
             console.log(error.message);
         }
     };
-    const logout = async () => {
-        await signOut(auth);
-        sessionStorage.removeItem("Auth Token");
-        navigate("/");
-    };
+
     return (
         <div className="signup--container">
             <h1>Sign Up</h1>
@@ -78,16 +76,16 @@ export function SignUp() {
                 >
                     Sign Up
                 </button>
-                <h4>User Logged In:</h4>
-                {user?.email}
+                {/* <h4>User Logged In:</h4>
+                {user?.email} */}
                 {/* {auth.currentUser.email} */}
-                <button
-                    onClick={logout}
+                {/* <button
+                    // onClick={logout}
                     className="signup--submit"
                     type="submit"
                 >
                     Sign out
-                </button>
+                </button> */}
             </div>
         </div>
     );

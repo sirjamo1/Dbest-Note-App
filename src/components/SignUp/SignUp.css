@@ -29,10 +29,10 @@
   border-bottom: #bdbf6c 8px solid;
   border-right: #bdbf6c 2px solid;
 }
-.signup--container form > label {
+.signup--container  > label {
   margin-top: 10px;
 }
-.signup--container form > input {
+.signup--container  > input {
   background-color: #eff266;
   font-family: "Handlee", cursive;
   border-style: none;
@@ -51,4 +51,8 @@
 .instructions {
   color: grey;
   font-size: 0.7rem ;
+}
+input {
+  background-color: #eff266;
+  border-style: none;
 }

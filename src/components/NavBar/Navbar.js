@@ -18,6 +18,9 @@ export const Navbar = () => {
     const handleLogout = () => {
         signOut(auth);
         navigate("/");
+        sessionStorage.removeItem("Auth Token");
+        sessionStorage.removeItem("uid");
+        sessionStorage.removeItem("email");
     };
     const navLinkStyles = ({ isActive }) => {
         return {
@@ -40,7 +43,7 @@ export const Navbar = () => {
             <NavLink style={navLinkStyles} to="/profile">
                 Profile
             </NavLink>
-            {user && (
+            {!user && (
                 <NavLink style={navLinkStyles} to="/login">
                     <div className="pencil--container">
                         <img
@@ -52,7 +55,7 @@ export const Navbar = () => {
                     </div>
                 </NavLink>
             )}
-            {!user && (
+            {user && (
                 <NavLink style={navLinkStyles} to="/">
                     <div onClick={handleLogout} className="pencil--container">
                         <img

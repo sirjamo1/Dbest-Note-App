@@ -40,7 +40,7 @@ export function Notes() {
             setNotes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
         getNotesData();
-        // setNotes((prevNotes) => [currentN, ...prevNotes]);
+        // setNotes((prevNotes) => [currentNote, ...prevNotes]);
         //  setCurrentNoteId(newNote.id);
     };
     const deleteNote = async (event, id, noteId) => {
@@ -66,7 +66,6 @@ export function Notes() {
                     newOldNotes.unshift({
                         ...oldNotes[i],
                         title: text,
-                        // text: text, //not sure about this
                         description: text,
                         // update: serverTimestamp(),
                         update: today.toLocaleString("en-US"),
@@ -74,15 +73,18 @@ export function Notes() {
                 } else {
                     newOldNotes.push(oldNotes[i]);
                 }
+                
             }
             return newOldNotes;
         });
     }
+
     //NOTE: this doesn't work
 
     const saveNotes = async (id, text) => {
         const noteDoc = doc(db, "notes", id);
-        await updateDoc(noteDoc, notes);
+        const update = findCurrentNote()
+        await updateDoc(noteDoc, update);
         console.log(noteDoc);
     };
     console.log({ notes });

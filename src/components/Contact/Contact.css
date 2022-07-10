@@ -39,7 +39,13 @@
   border-radius: 6px;
   text-indent: 6px;
 }
-.contact--container form > textarea {
+.contact--container> textarea {
+  background-color: #eff266;
+  border-style: none;
+  border-radius: 6px;
+  text-indent: 6px;
+}
+textarea {
   background-color: #eff266;
   border-style: none;
   border-radius: 6px;

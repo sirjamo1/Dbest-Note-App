@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./Login.css";
 //import { db } from "../../firebase-config";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import {
     onAuthStateChanged,
     signOut,
@@ -28,17 +28,23 @@ export function Login() {
             );
 
             sessionStorage.setItem("Auth Token", auth.currentUser.accessToken);
+            sessionStorage.setItem("uid", auth.currentUser.uid);
+            sessionStorage.setItem("email", auth.currentUser.email);
 
             navigate(redirectPath, { replace: true }); 
         } catch (error) {
             console.log(error.message);
         }
     };
-    const logout = async () => {
-        await signOut(auth);
-        sessionStorage.removeItem("Auth Token");
-        navigate("/");
-    };
+    // const logout = async () => {
+    //     await signOut(auth);
+    //     sessionStorage.removeItem("Auth Token");
+    //     navigate("/");
+    // };
+    // function handleSignup() {
+    //     navigate("signup", { replace: true });
+
+    // }
     // console.log(sessionStorage)
     return (
         <div className="signup--container">
@@ -81,16 +87,17 @@ export function Login() {
                 >
                     Login
                 </button>
-                <h4>User Logged In:</h4>
-                {user?.email}
+                {/* <h4>User Logged In:</h4>
+                {user?.email} */}
                 {/* {auth.currentUser.email} */}
-                <button
+                {/* <button
                     onClick={logout}
                     className="signup--submit"
                     type="submit"
                 >
                     Sign out
-                </button>
+                </button> */}
+                <h4>Don't have an account?<Link to="/signup"> Create one</Link></h4>
             </div>
         </div>
     );

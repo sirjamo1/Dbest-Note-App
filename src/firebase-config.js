@@ -36,3 +36,42 @@ export const auth = getAuth(app)
   // messagingSenderId: "1081824881176",
   // appId: "1:1081824881176:web:396d255f48a03ab5fdf16d",
   // measurementId: "G-44TQRNTXLP",
+
+  //********************************************* */
+  //************************************************ */
+  //NOTE: Changed rules in firestore Console from:
+  //****************************************** */
+  //*********anyone can change firebase data******* */
+  //**************************************** */
+//   rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /{document=**} {
+//       allow read, write: if true;
+//     }
+//   }
+// }
+//
+// TO:  CURRENTLY SET TO THIS (below)
+//**********only auth users can change data********
+//********************************************8 */ */
+//  rules_version = '2';
+//  service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /{document=**} {
+//       allow read, write: if request.auth != null;
+//     }
+//   }
+// }
+//
+//TO:
+//***********only auth user can change it's onw data********* */
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     // Allow only authenticated content owners access
+//     match /some_collection/{userId}/{documents=**} {
+//       allow read, write: if request.auth != null && request.auth.uid == userId
+//     }
+//   }
+// }

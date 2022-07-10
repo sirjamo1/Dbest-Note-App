@@ -13,6 +13,7 @@ import { Users } from "./Users/Users";
 import { Admin } from "./components/Admin";
 import { UserDetails } from "./Users/UserDetails";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import backgroundImg from "../src/components/images/paperBackground.png";
 
 export default function App() {
     const [user, setUser] = useState(null);
@@ -22,7 +23,13 @@ export default function App() {
     });
     return (
         <AuthProvider>
-            <main>
+            <main
+                style={{
+                    backgroundImage: `url(${backgroundImg})`,
+                    backgroundSize: "cover",
+                    height: "100vh"
+                }}
+            >
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Home />} />
