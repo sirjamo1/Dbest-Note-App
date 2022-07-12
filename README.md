@@ -13,11 +13,6 @@ Need to do
 <br />
 
 <ul>
-<li></li>
-<li>Notes:</li>
-    <ul>
-    <li>need to fix description disappearing when clicking out of notes page and clicking back in</li>
-    </ul>
 <li>Contact page:</li>
     <ul>
     <li>Form sends data even when fields are not met</li>
