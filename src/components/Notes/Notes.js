@@ -26,7 +26,7 @@ export function Notes() {
         getNotesData();
     }, []);
 
-    const createNewNoteData = async () => {
+    const createNewNoteData = async (text) => {
         await addDoc(notesCollectionRef, {
             id: nanoid(),
             title: `Type your title here`,
@@ -58,7 +58,15 @@ export function Notes() {
         (notes[0] && notes[0].id) || ""
     );
     let today = new Date();
+
     function updateNote(text) {
+        const noteRef = doc(db, "notes", currentNoteId);
+        updateDoc(noteRef, {
+            title: text.split("\n")[0],
+            description: text.slice(`${text.split("\n")[0].length}`),
+            update: today.toLocaleString("en-US"),
+        });
+
         setNotes((oldNotes) => {
             const newOldNotes = [];
             for (let i = 0; i < oldNotes.length; i++) {
@@ -66,28 +74,17 @@ export function Notes() {
                     newOldNotes.unshift({
                         ...oldNotes[i],
                         title: text,
-                        description: text,
+                        description: text.slice(text.split("\n")[0].length),
                         // update: serverTimestamp(),
                         update: today.toLocaleString("en-US"),
                     });
                 } else {
                     newOldNotes.push(oldNotes[i]);
                 }
-                
             }
             return newOldNotes;
         });
     }
-
-    //NOTE: this doesn't work
-
-    const saveNotes = async (id, text) => {
-        const noteDoc = doc(db, "notes", id);
-        const update = findCurrentNote()
-        await updateDoc(noteDoc, update);
-        console.log(noteDoc);
-    };
-    console.log({ notes });
     function findCurrentNote() {
         return (
             notes.find((note) => {
@@ -111,7 +108,7 @@ export function Notes() {
                             setCurrentNoteId={setCurrentNoteId}
                             newNote={createNewNoteData}
                             deleteNote={deleteNote}
-                            saveNotes={saveNotes}
+                            noteRef={notesCollectionRef}
                         />
                     ) : (
                         <></>

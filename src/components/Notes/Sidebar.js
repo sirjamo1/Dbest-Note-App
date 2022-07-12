@@ -13,17 +13,12 @@ export default function Sidebar(props) {
                 onClick={() => props.setCurrentNoteId(note.id)}
             >
                 <div className="text-snippet">
-                    <h1 className="text-snippet">
-                        {note.title.split("\n")[0]}
-                    </h1>
+                    <h1 className="text-snippet">{note.title}</h1>
                 </div>
                 <p className="text-snippet description">
-                    {note.title.slice(`${note.title.split("\n")[0].length}`)
-                        ? note.title.slice(
-                              `${note.title.split("\n")[0].length}`,
-                              150
-                          )
-                        : `No Content`}
+                    {note.description}
+                    {/* NEED TO FIX THIS
+                    description disappears when coming back to page  */}
                 </p>
                 <p className="text-snippet date--created">
                     Created : {note.date}
@@ -49,9 +44,9 @@ export default function Sidebar(props) {
                 <button className="new-note" onClick={props.newNote}>
                     +
                 </button>
-                <button className="new-note" onClick={props.saveNotes}>
+                {/* <button className="new-note" onClick={props.saveNotes}>
                     S
-                </button>
+                </button> */}
                 {/* NOTE: saveNotes doesn't work */}
             </div>
             {noteElements}
